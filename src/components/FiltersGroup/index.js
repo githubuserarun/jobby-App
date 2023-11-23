@@ -114,6 +114,43 @@ const FiltersGroup = props => {
     )
   }
 
+  const renderLocationOfEmployment = () => {
+    const {locationList} = props
+    return (
+      <div className="employment-type-container">
+        <h1 className="employment-type-heading"> Type of Location</h1>
+        <ul className="employee-type-list-container">
+          {locationList.map(eachLocation => {
+            const {changeLocationList} = props
+            const onSelectLocationType = event => {
+              changeLocationList(event.target.value)
+            }
+            return (
+              <li
+                className="employee-item"
+                key={eachLocation.locationId}
+                onChange={onSelectLocationType}
+              >
+                <input
+                  type="checkbox"
+                  id={eachLocation.locationId}
+                  className="check-input"
+                  value={eachLocation.locationId}
+                />
+                <label
+                  htmlFor={eachLocation.locationId}
+                  className="check-label"
+                >
+                  {eachLocation.label}
+                </label>
+              </li>
+            )
+          })}
+        </ul>
+      </div>
+    )
+  }
+
   return (
     <div className="filters-group-container">
       {renderSearchInput()}
@@ -122,6 +159,8 @@ const FiltersGroup = props => {
       {renderTypeOfEmployment()}
       <hr className="horizontal-line" />
       {renderSalaryRange()}
+      <hr className="horizontal-line" />
+      {renderLocationOfEmployment()}
     </div>
   )
 }
